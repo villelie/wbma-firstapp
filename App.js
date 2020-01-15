@@ -21,22 +21,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontSize: '1em',
   },
-  flex: {
-    backgroundColor: '#999',
-    flex: 1,
-    flexDirection: 'row',
-    marginBottom: 5,
-  },
-  image: {
-    flexGrow: 1,
-    minWidth: 160,
-    minHeight: 160,
-    margin: 5,
-  },
-  text: {
-    flexShrink: 1,
-    margin: 5,
-  },
 });
 
 export default App;

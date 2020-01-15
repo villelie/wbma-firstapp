@@ -24,13 +24,6 @@ ListItem.propTypes = {
 export default ListItem;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '1em',
-    },
     flex: {
         backgroundColor: '#999',
         flex: 1,
