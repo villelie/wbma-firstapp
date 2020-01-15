@@ -2,15 +2,17 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, Image, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 
+const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
+
 const ListItem = (props) => {
     return (
-        <TouchableOpacity style={styles.flex}>
+        <TouchableOpacity style={styles.card}>
             <Image
                 style={styles.image}
-                source={{uri: props.singleMedia.thumbnails.w160}}
+                source={{uri: mediaUrl + props.singleMedia.thumbnails.w160}}
             />
             <View style={styles.text}>
-                <Text style={{fontSize: '1.2em', fontWeight: 'bold'}}>{props.singleMedia.title}</Text>
+                <Text style={styles.title}>{props.singleMedia.title}</Text>
                 <Text>{props.singleMedia.description}</Text>
             </View>
         </TouchableOpacity>
@@ -24,20 +26,25 @@ ListItem.propTypes = {
 export default ListItem;
 
 const styles = StyleSheet.create({
-    flex: {
-        backgroundColor: '#999',
-        flex: 1,
+    card: {
         flexDirection: 'row',
-        marginBottom: 5,
+        backgroundColor: '#999',
+        margin: 5,
+        borderRadius: 15,
+
     },
     image: {
-        flexGrow: 1,
-        minWidth: 160,
+        flex: 1,
         minHeight: 160,
         margin: 5,
+        borderRadius: 15,
     },
     text: {
-        flexShrink: 1,
+        flex: 2,
         margin: 5,
+    },
+    title: {
+        fontWeight: 'bold',
+        fontSize: '1.4em',
     },
 });
