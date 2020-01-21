@@ -4,6 +4,9 @@
     "slug": "wbma-firstapp-01",
     "privacy": "public",
     "sdkVersion": "36.0.0",
+	"androidStatusBar": {
+      "backgroundColor": "#ffb624"
+    }
     "platforms": [
       "ios",
       "android",

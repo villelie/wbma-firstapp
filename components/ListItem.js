@@ -31,20 +31,23 @@ const styles = StyleSheet.create({
         backgroundColor: '#999',
         margin: 5,
         borderRadius: 15,
-
+        boxShadow: '2px 2px 5px black',
     },
     image: {
-        flex: 1,
-        minHeight: 160,
+        height: 160,
+        width: 160,
         margin: 5,
-        borderRadius: 15,
+        borderWidth: 2,
+        borderColor: 'orange',
+        borderRadius: 100,
     },
     text: {
-        flex: 2,
+        flex: 1,
         margin: 5,
     },
     title: {
         fontWeight: 'bold',
         fontSize: '1.4em',
+        color: 'orange',
     },
 });
