@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
-import List from './components/List';
+import {Image, Text} from 'react-native';
 import {MediaProvider} from './contexts/MediaContext';
-import {StatusBar} from 'react-native';
+import Navigator from './navigators/Navigator';
 
 const App = () => {
   return (
@@ -24,9 +23,7 @@ const App = () => {
           borderRadius: 15,
           boxShadow: '2px 2px 5px black',
         }}>Tons of pictures.</Text>
-      <View>
-        <List />
-      </View>
+      <Navigator></Navigator>
     </MediaProvider>
   );
 };
