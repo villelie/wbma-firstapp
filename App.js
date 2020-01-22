@@ -7,8 +7,8 @@ const App = () => {
   return (
     <MediaProvider>
       <Image
-        style={{width: '100%', height: 480, }}
-        source={{uri: 'https://picsum.photos/800/480'}}
+        style={{width: '100%', height: 200, }}
+        source={{uri: 'https://picsum.photos/800/200'}}
       />
       <Text
         style={{

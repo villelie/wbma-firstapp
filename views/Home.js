@@ -1,10 +1,10 @@
 import React from 'react';
 import {View} from 'react-native';
-import List from './components/List';
+import List from '../components/List';
 
 const Home = () => {
     return (
-        <View style={styles.container}>
+        <View>
             <List></List>
         </View>
     );

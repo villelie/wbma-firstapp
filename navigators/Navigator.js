@@ -1,5 +1,7 @@
 import Home from '../views/Home';
 import Profile from '../views/Profile';
+import {createAppContainer} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
 
 const Navigator = createBottomTabNavigator(
     {
@@ -18,7 +20,10 @@ const Navigator = createBottomTabNavigator(
     },
     {
         initialRouteName: 'Home',
-    }
+        tabBarOptions: {
+            scrollEnabled: true,
+        },
+    },
 );
 
-export default Navigator;
+export default createAppContainer(Navigator);
