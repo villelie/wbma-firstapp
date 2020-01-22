@@ -21,7 +21,8 @@ const Login = (props) => {
     try {
       const result = await register(inputs);
       console.log(result)
-      signInAsync();
+      if (!result.error) signInAsync();
+      else MediaStreamError(result.error);
     } catch (e) {
       console.log(e);
     }
