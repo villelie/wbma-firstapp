@@ -1,9 +1,11 @@
 import Home from '../views/Home';
 import Profile from '../views/Profile';
+import Single from '../views/Single';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
+import {createStackNavigator} from 'react-navigation-stack';
 
-const Navigator = createBottomTabNavigator(
+const TabNavigator = createBottomTabNavigator(
     {
         Home: {
             screen: Home,
@@ -20,8 +22,19 @@ const Navigator = createBottomTabNavigator(
     },
     {
         initialRouteName: 'Home',
-        tabBarOptions: {
-            scrollEnabled: true,
+    },
+);
+
+const Navigator = createStackNavigator(
+    {
+        Home: {
+            screen: TabNavigator,
+            navigationOptions: {
+                headerMode: 'none',
+            },
+        },
+        Single: {
+            screen: Single,
         },
     },
 );
