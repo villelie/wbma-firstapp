@@ -9,7 +9,7 @@ const ListItem = (props) => {
         <TouchableOpacity style={styles.card}
             onPress={
                 () => {
-                    props.navigation.push('Single');
+                    props.navigation.push('Single', {file: props.singleMedia});
                 }
             }>
             <Image
