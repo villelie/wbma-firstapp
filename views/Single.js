@@ -19,7 +19,7 @@ const Single = (props) => {
                 paddingTop: 20,
                 textAlign: 'center',
                 fontWeight: 'bold',
-                fontSize: '1.4em',
+                fontSize: 24,
                 color: 'orange',
             }}>
                 {file.title}

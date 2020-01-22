@@ -19,10 +19,9 @@ const Home = (props) => {
                     padding: 20,
                     backgroundColor: '#999',
                     fontWeight: 'bold',
-                    fontSize: '1.4em',
+                    fontSize: 24,
                     color: 'orange',
                     borderRadius: 15,
-                    boxShadow: '2px 2px 5px black',
                 }}>Tons of pictures.</Text>
             <List navigation={navigation}></List>
         </View>

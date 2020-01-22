@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#999',
         margin: 5,
         borderRadius: 15,
-        boxShadow: '2px 2px 5px black',
     },
     image: {
         height: 160,
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontWeight: 'bold',
-        fontSize: '1.4em',
+        fontSize: 24,
         color: 'orange',
     },
 });
