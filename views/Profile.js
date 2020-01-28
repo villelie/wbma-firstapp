@@ -3,6 +3,8 @@ import {Image, Dimensions, AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import {Container, Content, Card, CardItem, Text, Button, Icon, Body} from 'native-base';
 
+const avatarURL = 'http://media.mw.metropolia.fi/wbma/tags/avatar_';
+
 const Profile = (props) => {
     const [user, setUser] = useState({});
     const userToState = async () => {
@@ -12,7 +14,6 @@ const Profile = (props) => {
     useEffect(() => {
         userToState();
     }, []);
-
     const signOutAsync = async () => {
         await AsyncStorage.clear();
         props.navigation.navigate('Auth');
@@ -30,7 +31,7 @@ const Profile = (props) => {
                     <CardItem cardBody>
                         <Image
                             style={{height: (Dimensions.get('window').height * 0.5), width: undefined, flex: 1}}
-                            source={{uri: 'https://users.metropolia.fi/~villelie/web-tekniikat-ja-digitaalinen-media/projekti/img/ppic.jpg'}}
+                            source={{uri: avatarURL + user.user_id}}
                         />
                     </CardItem>
                     <CardItem>

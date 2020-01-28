@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, Dimensions} from 'react-native';
-import {Container, Content, Card, CardItem, Text, Body, Header, Title, Left, Button, Icon} from 'native-base';
+import {Container, Content, Card, CardItem, Text, Body} from 'native-base';
 
 const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
