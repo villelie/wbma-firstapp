@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, Dimensions} from 'react-native';
-import Image from 'react-native-scalable-image';
+import {Image, Dimensions} from 'react-native';
+import {Container, Content, Card, CardItem, Text, Body, Header, Title, Left, Button, Icon} from 'native-base';
 
 const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -8,32 +8,29 @@ const Single = (props) => {
     const {navigation} = props;
     const file = navigation.state.params.file;
     return (
-        <View style={{
-            backgroundColor: '#999',
-            margin: 5,
-            borderRadius: 15,
-            height: '100%',
-            boxShadow: '2px 2px 5px black',
-        }}>
-            <Text style={{
-                paddingTop: 20,
-                textAlign: 'center',
-                fontWeight: 'bold',
-                fontSize: 24,
-                color: 'orange',
-            }}>
-                {file.title}
-            </Text>
-            <Image
-                width={(Dimensions.get('window').width)*0.8}
-                style={{
-                    margin: 'auto',
-                    borderWidth: 2,
-                    borderColor: 'orange',
-                    borderRadius: 5,
-                }}
-                source={{uri: mediaURL + file.filename}} />
-        </View>
+        <Container>
+            <Content>
+                <Card>
+                    <CardItem>
+                        <Body>
+                            <Text>{file.title}</Text>
+                            <Text note>by {file.user_id}</Text>
+                        </Body>
+                    </CardItem>
+                    <CardItem cardBody>
+                        <Image
+                            style={{height: (Dimensions.get('window').height * 0.5), width: undefined, flex: 1}}
+                            source={{uri: mediaURL + file.filename}}
+                        />
+                    </CardItem>
+                    <CardItem>
+                        <Body>
+                            <Text>{file.description}</Text>
+                        </Body>
+                    </CardItem>
+                </Card>
+            </Content>
+        </Container>
     );
 };
 

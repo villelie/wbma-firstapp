@@ -1,9 +1,10 @@
 import React from 'react';
-import {View, Text, Button, AsyncStorage} from 'react-native';
+import {AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
-import FormTextInput from '../components/FormTextInput';
+{/* is this really useless now? import FormTextInput from '../components/FormTextInput'; */}
 import {login, register} from '../hooks/APIhooks';
 import useSignUpForm from '../hooks/LoginHooks';
+import {Container, Content, Form, Item, Input, Label, Text, Button} from 'native-base';
 
 const Login = (props) => {
   const {handleUsernameChange, handleEmailChange, handleFullnameChange, handlePasswordChange, inputs} = useSignUpForm();
@@ -28,61 +29,69 @@ const Login = (props) => {
     }
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: 40,
-      }} >
-      {/*Login*/}
-      <View>
-        <Text>Login</Text>
-        <View>
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='username'
-            onChangeText={handleUsernameChange}
-          />
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='password'
-            secureTextEntry={true}
-            onChangeText={handlePasswordChange}
-          />
-          <Button title="Sign in!" onPress={signInAsync} />
-        </View>
-      </View >
-      {/*register*/}
-      <View>
-        <Text>Register</Text>
-        <View>
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='username'
-            onChangeText={handleUsernameChange}
-          />
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='email'
-            onChangeText={handleEmailChange}
-          />
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='fullname'
-            onChangeText={handleFullnameChange}
-          />
-          <FormTextInput
-            autoCapitalize='none'
-            placeholder='password'
-            secureTextEntry={true}
-            onChangeText={handlePasswordChange}
-          />
-          <Button title="Sign up!" onPress={signUpAsync} />
-        </View>
-      </View >
-    </View >
+    <Container>
+      <Content>
+        {/*Login*/}
+        <Text style={{textAlign: 'center', fontWeight: 'bold'}}>Login</Text>
+        <Form>
+          <Item stackedLabel>
+            <Label>Username</Label>
+            <Input
+              autoCapitalize={'none'}
+              onChangeText={handleUsernameChange}
+            />
+          </Item>
+          <Item stackedLabel last>
+            <Label>Password</Label>
+            <Input
+              autoCapitalize={'none'}
+              secureTextEntry={true}
+              onChangeText={handlePasswordChange}
+            />
+          </Item>
+          <Button onPress={signInAsync}>
+            <Text>Sign in</Text>
+          </Button>
+        </Form>
+
+        {/*Register*/}
+        <Text style={{marginTop: 25, textAlign: 'center', fontWeight: 'bold'}}>Register</Text>
+        <Form>
+          <Item stackedLabel>
+            <Label>Username</Label>
+            <Input
+              autoCapitalize={'none'}
+              onChangeText={handleUsernameChange}
+            />
+          </Item>
+          <Item stackedLabel>
+            <Label>Email</Label>
+            <Input
+              autoCapitalize={'none'}
+              onChangeText={handleEmailChange}
+            />
+          </Item>
+          <Item stackedLabel>
+            <Label>Full name</Label>
+            <Input
+              autoCapitalize={'words'}
+              onChangeText={handleFullnameChange}
+            />
+          </Item>
+          <Item stackedLabel last>
+            <Label>Password</Label>
+            <Input
+              autoCapitalize={'none'}
+              secureTextEntry={true}
+              onChangeText={handlePasswordChange}
+            />
+          </Item>
+          <Button onPress={signUpAsync}>
+            <Text>Sign up</Text>
+          </Button>
+        </Form>
+      </Content>
+    </Container>
   );
 };
 
