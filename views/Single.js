@@ -1,7 +1,9 @@
 import React from 'react';
-import {Image, Dimensions} from 'react-native';
+import {Dimensions} from 'react-native';
+import AsyncImage from '../components/AsyncImage';
 import {Container, Content, Card, CardItem, Text, Body} from 'native-base';
 
+const deviceHeight = Dimensions.get('window').height;
 const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Single = (props) => {
@@ -18,8 +20,12 @@ const Single = (props) => {
                         </Body>
                     </CardItem>
                     <CardItem cardBody>
-                        <Image
-                            style={{height: (Dimensions.get('window').height * 0.5), width: undefined, flex: 1}}
+                        <AsyncImage
+                            style={{
+                                width: '100%',
+                                height: deviceHeight / 2,
+                            }}
+                            spinnerColor='#777'
                             source={{uri: mediaURL + file.filename}}
                         />
                     </CardItem>

@@ -2,14 +2,28 @@ import React, {useState, useEffect} from 'react';
 import {Image, Dimensions, AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import {Container, Content, Card, CardItem, Text, Button, Icon, Body} from 'native-base';
+import {fetchGET} from '../hooks/APIHooks';
+import AsyncImage from '../components/AsyncImage';
 
-const avatarURL = 'http://media.mw.metropolia.fi/wbma/tags/avatar_';
+const deviceHeight = Dimensions.get('window').height;
+const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
 const Profile = (props) => {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({userdata: {}, avatar: '', });
     const userToState = async () => {
-        const userFromState = await AsyncStorage.getItem('user');
-        setUser(JSON.parse(userFromState));
+        try {
+            const userFromStorage = await AsyncStorage.getItem('user');
+            const uData = JSON.parse(userFromStorage);
+            const avatarPic = await fetchGET('tags', 'avatar_' + uData.user_id);
+            console.log('aPic', avatarPic[0].filename);
+            setUser((user) => (
+                {
+                    userdata: uData,
+                    avatar: avatarPic[0].filename,
+                }));
+        } catch (e) {
+            console.log('Profile error: ', e.message);
+        }
     };
     useEffect(() => {
         userToState();
@@ -25,20 +39,24 @@ const Profile = (props) => {
                     <CardItem>
                         <Icon name='person' />
                         <Body>
-                            <Text>{user.username}</Text>
+                            <Text>{user.userdata.username}</Text>
                         </Body>
                     </CardItem>
                     <CardItem cardBody>
-                        <Image
-                            style={{height: (Dimensions.get('window').height * 0.5), width: undefined, flex: 1}}
-                            source={{uri: avatarURL + user.user_id}}
+                        <AsyncImage
+                            style={{
+                                width: '100%',
+                                height: deviceHeight / 2,
+                            }}
+                            spinnerColor='#777'
+                            source={{uri: mediaURL + user.avatar}}
                         />
                     </CardItem>
                     <CardItem>
                         <Body>
-                            <Text>Id: {user.user_id}</Text>
-                            <Text>Full name: {user.full_name}</Text>
-                            <Text>Email: {user.email}</Text>
+                            <Text>Id: {user.userdata.user_id}</Text>
+                            <Text>Full name: {user.userdata.full_name}</Text>
+                            <Text>Email: {user.userdata.email}</Text>
                         </Body>
                     </CardItem>
                     <Button onPress={signOutAsync}>
