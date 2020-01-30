@@ -2,6 +2,7 @@ import React from 'react';
 import {Dimensions} from 'react-native';
 import AsyncImage from '../components/AsyncImage';
 import {Container, Content, Card, CardItem, Text, Body} from 'native-base';
+import PropTypes from 'prop-types';
 
 const deviceHeight = Dimensions.get('window').height;
 const mediaURL = 'http://media.mw.metropolia.fi/wbma/uploads/';
@@ -38,6 +39,11 @@ const Single = (props) => {
             </Content>
         </Container>
     );
+};
+
+Single.propTypes = {
+    navigation: PropTypes.object,
+    file: PropTypes.object,
 };
 
 export default Single;

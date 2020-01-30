@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Image, Dimensions, AsyncStorage} from 'react-native';
+import {Dimensions, AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import {Container, Content, Card, CardItem, Text, Button, Icon, Body} from 'native-base';
-import {fetchGET} from '../hooks/APIHooks';
+import {fetchGET} from '../hooks/APIhooks';
 import AsyncImage from '../components/AsyncImage';
 
 const deviceHeight = Dimensions.get('window').height;

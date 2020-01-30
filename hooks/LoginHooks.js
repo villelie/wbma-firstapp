@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import validate from 'validate.js';
 
 const useSignUpForm = () => {
     const [inputs, setInputs] = useState({});
@@ -30,12 +31,24 @@ const useSignUpForm = () => {
                 password: text,
             }));
     };
+    const validateUser = (param) => {
+        const valResult = validate({param: inputs.param}, constraints);
+        let valid = undefined;
+        if (valResult) valid = valResult.param[0];
+        setErrors((errors) => ({
+            ...errors,
+            username: valid,
+        }));
+    };
     return {
         handleUsernameChange,
         handleEmailChange,
         handleFullnameChange,
         handlePasswordChange,
+        //validateUser,
         inputs,
+        //errors,
+        //setErrors,
     };
 };
 

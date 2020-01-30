@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
-{/* is this really useless now? import FormTextInput from '../components/FormTextInput'; */}
+import FormTextInput from '../components/FormTextInput';
 import {login, register} from '../hooks/APIhooks';
 import useSignUpForm from '../hooks/LoginHooks';
-import {Container, Content, Form, Item, Input, Label, Text, Button} from 'native-base';
+import {Container, Content, Form, Item, Label, Text, Button} from 'native-base';
 
 const Login = (props) => {
   const {handleUsernameChange, handleEmailChange, handleFullnameChange, handlePasswordChange, inputs} = useSignUpForm();
@@ -28,68 +28,87 @@ const Login = (props) => {
       console.log(e);
     }
   };
+  let [formToggle, setFormToggle] = useState(true);
+  const changeForm = () => setFormToggle(!formToggle)
   return (
     <Container>
       <Content>
         {/*Login*/}
-        <Text style={{textAlign: 'center', fontWeight: 'bold'}}>Login</Text>
-        <Form>
-          <Item stackedLabel>
-            <Label>Username</Label>
-            <Input
-              autoCapitalize={'none'}
-              onChangeText={handleUsernameChange}
-            />
-          </Item>
-          <Item stackedLabel last>
-            <Label>Password</Label>
-            <Input
-              autoCapitalize={'none'}
-              secureTextEntry={true}
-              onChangeText={handlePasswordChange}
-            />
-          </Item>
-          <Button onPress={signInAsync}>
-            <Text>Sign in</Text>
-          </Button>
-        </Form>
-
+        {formToggle &&
+          <Form>
+            <Text style={{textAlign: 'center', fontWeight: 'bold'}}>Login</Text>
+            <Item stackedLabel>
+              <Label>Username</Label>
+              <FormTextInput
+                autoCapitalize={'none'}
+                value={inputs.username}
+                onChangeText={handleUsernameChange}
+              />
+            </Item>
+            <Item stackedLabel last>
+              <Label>Password</Label>
+              <FormTextInput
+                autoCapitalize={'none'}
+                secureTextEntry={true}
+                value={inputs.password}
+                onChangeText={handlePasswordChange}
+              />
+            </Item>
+            <Button full onPress={signInAsync}>
+              <Text>Sign in!</Text>
+            </Button>
+            <Button transparent onPress={changeForm}>
+              <Text>No account yet? Sign up!</Text>
+            </Button>
+          </Form>
+        }
         {/*Register*/}
-        <Text style={{marginTop: 25, textAlign: 'center', fontWeight: 'bold'}}>Register</Text>
-        <Form>
-          <Item stackedLabel>
-            <Label>Username</Label>
-            <Input
-              autoCapitalize={'none'}
-              onChangeText={handleUsernameChange}
-            />
-          </Item>
-          <Item stackedLabel>
-            <Label>Email</Label>
-            <Input
-              autoCapitalize={'none'}
-              onChangeText={handleEmailChange}
-            />
-          </Item>
-          <Item stackedLabel>
-            <Label>Full name</Label>
-            <Input
-              autoCapitalize={'words'}
-              onChangeText={handleFullnameChange}
-            />
-          </Item>
-          <Item stackedLabel last>
-            <Label>Password</Label>
-            <Input
-              autoCapitalize={'none'}
-              secureTextEntry={true}
-              onChangeText={handlePasswordChange}
-            />
-          </Item>
-          <Button onPress={signUpAsync}>
-            <Text>Sign up</Text>
-          </Button>
-        </Form>
+        {!formToggle &&
+          <Form>
+            <Text style={{textAlign: 'center', fontWeight: 'bold'}}>Register</Text>
+            <Item stackedLabel>
+              <Label>Username</Label>
+              <FormTextInput
+                autoCapitalize={'none'}
+                value={inputs.username}
+                onChangeText={handleUsernameChange}
+              //onEndEditing={checkUsername}
+              //error={errors.username}
+              />
+            </Item>
+            <Item stackedLabel>
+              <Label>Email</Label>
+              <FormTextInput
+                autoCapitalize={'none'}
+                value={inputs.email}
+                onChangeText={handleEmailChange}
+              />
+            </Item>
+            <Item stackedLabel>
+              <Label>Full name</Label>
+              <FormTextInput
+                autoCapitalize={'words'}
+                value={inputs.fullname}
+                onChangeText={handleFullnameChange}
+              />
+            </Item>
+            <Item stackedLabel last>
+              <Label>Password</Label>
+              <FormTextInput
+                autoCapitalize={'none'}
+                secureTextEntry={true}
+                value={inputs.password}
+                onChangeText={handlePasswordChange}
+              />
+            </Item>
+            <Button full onPress={signUpAsync}>
+              <Text>Sign up!</Text>
+            </Button>
+            <Button transparent onPress={changeForm}>
+              <Text>Already registered? Sign in!</Text>
+            </Button>
+          </Form>
+        }
       </Content>
     </Container>
   );
