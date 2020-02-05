@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import validate from 'validate.js';
-import {fetchGET} from './APIhooks';
+import {fetchGET} from './APIHooks';
 
 const constraints = {
     username: {

@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import ListItem from './ListItem';
 import {MediaContext} from '../contexts/MediaContext';
-import {getAllMedia} from '../hooks/APIhooks';
+import {getAllMedia} from '../hooks/APIHooks';
 import {List as BaseList} from 'native-base';
 
 const List = (props) => {

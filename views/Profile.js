@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Dimensions, AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import {Container, Content, Card, CardItem, Text, Button, Icon, Body} from 'native-base';
-import {fetchGET} from '../hooks/APIhooks';
+import {fetchGET} from '../hooks/APIHooks';
 import AsyncImage from '../components/AsyncImage';
 
 const deviceHeight = Dimensions.get('window').height;
@@ -59,7 +59,7 @@ const Profile = (props) => {
                             <Text>Email: {user.userdata.email}</Text>
                         </Body>
                     </CardItem>
-                    <Button onPress={signOutAsync}>
+                    <Button full onPress={signOutAsync}>
                         <Text>Sign out</Text>
                     </Button>
                 </Card>

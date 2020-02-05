@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
-import {fetchGET, fetchPOST} from '../hooks/APIhooks';
+import {fetchGET, fetchPOST} from '../hooks/APIHooks';
 import useSignUpForm from '../hooks/LoginHooks';
 import {Container, Content, Form, Item, Text, Button, Title, Body, Header, H2} from 'native-base';
 
