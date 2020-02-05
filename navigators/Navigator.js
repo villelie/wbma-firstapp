@@ -1,13 +1,14 @@
-import Home from '../views/Home';
-import Profile from '../views/Profile';
-import Upload from '../views/Upload';
-import Single from '../views/Single';
-import AuthLoading from '../views/AuthLoading';
-import Login from '../views/Login';
+/* eslint-disable react/display-name */
+import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {createStackNavigator} from 'react-navigation-stack';
-import React from 'react';
+import Home from '../views/Home';
+import Profile from '../views/Profile';
+import Single from '../views/Single';
+import AuthLoading from '../views/AuthLoading';
+import Login from '../views/Login';
+import Upload from '../views/Upload';
 import {Icon} from 'native-base';
 
 const TabNavigator = createBottomTabNavigator(
@@ -26,25 +27,35 @@ const TabNavigator = createBottomTabNavigator(
                 } else if (routeName === 'Profile') {
                     iconName = 'person';
                 } else if (routeName === 'Upload') {
-                    iconName = 'beer';
+                    iconName = 'add';
                 }
 
-                // You can return any component that you like here!
                 return <Icon
                     name={iconName}
                     size={25}
                 />;
             },
         }),
-    }
+        tabBarOptions: {
+            activeTintColor: '#000',
+        },
+    },
 );
+
+TabNavigator.navigationOptions = ({navigation}) => {
+    const {routeName} = navigation.state.routes[navigation.state.index];
+    const headerTitle = routeName;
+    return {
+        headerTitle,
+    };
+};
 
 const StackNavigator = createStackNavigator(
     {
         Home: {
             screen: TabNavigator,
             navigationOptions: {
-                headerMode: 'none', // this will hide the header
+                headerMode: 'none',
             },
         },
         Single: {
@@ -64,7 +75,7 @@ const Navigator = createSwitchNavigator(
     },
     {
         initialRouteName: 'AuthLoading',
-    }
+    },
 );
 
 export default createAppContainer(Navigator);

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FormTextInput from '../components/FormTextInput';
 import {fetchGET, fetchPOST} from '../hooks/APIHooks';
 import useSignUpForm from '../hooks/LoginHooks';
-import {Container, Content, Form, Item, Text, Button, Title, Body, Header, H2} from 'native-base';
+import {Container, Content, Form, Item, Text, Button, Title, Body, H2, Card, CardItem} from 'native-base';
 
 
 
@@ -78,9 +78,6 @@ const Login = (props) => {
 
   return (
     <Container>
-      <Header>
-        <Body><Title>MyApp</Title></Body>
-      </Header>
       <Content>
         {/* login form */}
         {toggleForm &&
@@ -92,7 +89,7 @@ const Login = (props) => {
               <FormTextInput
                 autoCapitalize='none'
                 value={inputs.username}
-                placeholder='username'
+                placeholder='Username'
                 onChangeText={handleUsernameChange}
               />
             </Item>
@@ -100,16 +97,16 @@ const Login = (props) => {
               <FormTextInput
                 autoCapitalize='none'
                 value={inputs.password}
-                placeholder='password'
+                placeholder='Password'
                 secureTextEntry={true}
                 onChangeText={handlePasswordChange}
               />
             </Item>
             <Button full onPress={signInAsync}><Text>Sign in!</Text></Button>
-            <Button dark full onPress={() => {
+            <Button transparent full onPress={() => {
               setToggleForm(false);
             }}>
-              <Text>or Register</Text>
+              <Text>Dont have account? Sign up!</Text>
             </Button>
           </Form>
         }
@@ -124,7 +121,7 @@ const Login = (props) => {
               <FormTextInput
                 autoCapitalize='none'
                 value={inputs.username}
-                placeholder='username'
+                placeholder='Username'
                 onChangeText={handleUsernameChange}
                 onEndEditing={() => {
                   checkAvail();
@@ -137,7 +134,7 @@ const Login = (props) => {
               <FormTextInput
                 autoCapitalize='none'
                 value={inputs.email}
-                placeholder='email'
+                placeholder='Email'
                 onChangeText={handleEmailChange}
                 onEndEditing={() => {
                   validateField(validationProperties.email);
@@ -149,7 +146,7 @@ const Login = (props) => {
               <FormTextInput
                 autoCapitalize='none'
                 value={inputs.full_name}
-                placeholder='fullname'
+                placeholder='Full name'
                 onChangeText={handleFullnameChange}
                 onEndEditing={() => {
                   validateField(validationProperties.full_name);
@@ -161,7 +158,7 @@ const Login = (props) => {
               <FormTextInput
                 autoCapitalize='none'
                 value={inputs.password}
-                placeholder='password'
+                placeholder='Password'
                 secureTextEntry={true}
                 onChangeText={handlePasswordChange}
                 onEndEditing={() => {
@@ -174,7 +171,7 @@ const Login = (props) => {
               <FormTextInput
                 autoCapitalize='none'
                 value={inputs.confirmPassword}
-                placeholder='confirm password'
+                placeholder='Confirm password'
                 secureTextEntry={true}
                 onChangeText={handleConfirmPasswordChange}
                 onEndEditing={() => {
@@ -186,10 +183,10 @@ const Login = (props) => {
             <Button full onPress={registerAsync}>
               <Text>Register!</Text>
             </Button>
-            <Button dark full onPress={() => {
+            <Button transparent full onPress={() => {
               setToggleForm(true);
             }}>
-              <Text>or Login</Text>
+              <Text>Do you have account already? Sign in!</Text>
             </Button>
           </Form>
         }
