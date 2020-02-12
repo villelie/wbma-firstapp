@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {AsyncStorage} from "react-native";
 
 const apiUrl = 'http://media.mw.metropolia.fi/wbma/';
 
@@ -37,29 +37,42 @@ const fetchPOST = async (endpoint = '', data = {}, token = '') => {
     return json;
 };
 
-const getAllMedia = () => {
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const fetchUrl = async () => {
-        try {
-            const response = await fetch(apiUrl + 'media/all');
-            const json = await response.json();
-            const result = await Promise.all(json.files.map(async (item) => {
-                const tnResponse = await fetch(apiUrl + 'media/' + item.file_id);
-                return await tnResponse.json();
-            }));
-
-            console.log('Hooks: ', result);
-            setData(result);
-            setLoading(false);
-        } catch (e) {
-            console.log('Error: ', e);
-        }
+const fetchFormData = async (
+    endpoint = '', data = new FormData(), token = '') => {
+    const fetchOptions = {
+        method: 'POST',
+        headers: {
+            'x-access-token': token,
+        },
+        body: data,
+    };
+    const response = await fetch(apiUrl + endpoint, fetchOptions);
+    const json = await response.json();
+    console.log(json);
+    if (response.status === 400 || response.status === 401) {
+        const message = Object.values(json).join();
+        throw new Error(message);
+    } else if (response.status > 299) {
+        throw new Error('fetchPOST error: ' + response.status);
     }
-    useEffect(() => {
-        fetchUrl();
-    }, []);
-    return [data, loading];
-}
+    return json;
+};
 
-export {getAllMedia, fetchGET, fetchPOST};
+const getAllMedia = async () => {
+    const json = await fetchGET('media/all');
+    const result = await Promise.all(json.files.map(async (item) => {
+        return await fetchGET('media', item.file_id);
+    }));
+    return result;
+};
+
+const getUser = async (id) => {
+    try {
+        const token = await AsyncStorage.getItem('userToken');
+        return await fetchGET('users', id, token);
+    } catch (e) {
+        console.log(e.message);
+    }
+};
+
+export {getAllMedia, fetchGET, fetchPOST, fetchFormData, getUser};
