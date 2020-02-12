@@ -16,6 +16,21 @@ const fetchGET = async (endpoint = '', params = '', token = '') => {
     return await response.json();
 };
 
+const fetchDEL = async (endpoint = '', params = '', token = '') => {
+    const fetchOptions = {
+        method: 'DELETE',
+        headers: {
+            'x-access-token': token,
+        },
+    };
+    const response = await fetch(apiUrl + endpoint + '/' + params,
+        fetchOptions);
+    if (!response.ok) {
+        throw new Error('fetchGET error: ' + response.status);
+    }
+    return await response.json();
+};
+
 const fetchPOST = async (endpoint = '', data = {}, token = '') => {
     const fetchOptions = {
         method: 'POST',
@@ -75,4 +90,13 @@ const getUser = async (id) => {
     }
 };
 
-export {getAllMedia, fetchGET, fetchPOST, fetchFormData, getUser};
+const getUserMedia = async (token) => {
+    console.log('im here', token);
+    const json = await fetchGET('media/user', '', token);
+    const result = await Promise.all(json.map(async (item) => {
+        return await fetchGET('media', item.file_id);
+    }));
+    return result;
+};
+
+export {getAllMedia, fetchGET, fetchDEL, fetchPOST, fetchFormData, getUser, getUserMedia};

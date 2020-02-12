@@ -9,6 +9,7 @@ import Single from '../views/Single';
 import AuthLoading from '../views/AuthLoading';
 import Login from '../views/Login';
 import Upload from '../views/Upload';
+import MyFiles from '../views/MyFiles';
 import {Icon} from 'native-base';
 
 const TabNavigator = createBottomTabNavigator(
@@ -60,6 +61,9 @@ const StackNavigator = createStackNavigator(
         },
         Single: {
             screen: Single,
+        },
+        MyFiles: {
+            screen: MyFiles,
         },
         Logout: {
             screen: Login,

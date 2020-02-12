@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ListItem as BaseListItem, Thumbnail, Text, Left, Body, Right, Button} from 'native-base';
+import {ListItem as BaseListItem, Thumbnail, Text, Left, Body, Right, Button, Icon} from 'native-base';
+import {AsyncStorage} from 'react-native';
+import {fetchDEL} from '../hooks/APIHooks';
 
 const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
@@ -15,14 +17,22 @@ const ListItem = (props) => {
                 <Text note numberOfLines={1}>{props.singleMedia.description}</Text>
             </Body>
             <Right>
-                <Button transparent
-                    onPress={
-                        () => {
-                            props.navigation.push('Single', {file: props.singleMedia});
-                        }
-                    }>
-                    <Text>View</Text>
+                <Button full info onPress={() => {
+                    props.navigation.push('Single', {file: props.singleMedia});
+                }}>
+                    <Icon name='eye' />
                 </Button>
+                {props.mode === 'user' &&
+                    <Button full danger onPress={async () => {
+                        const token = await AsyncStorage.getItem('userToken');
+                        const del = await fetchDEL('media', props.singleMedia.file_id, token);
+                        if (del.message) {
+                            console.log(del.message);
+                        };
+                    }}>
+                        <Icon name='trash' />
+                    </Button>
+                }
             </Right>
         </BaseListItem>
     );

@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, {useState, useEffect} from 'react';
 import {Content, Form, Item, Button, Body, Text} from 'native-base';
 import * as ImagePicker from 'expo-image-picker';

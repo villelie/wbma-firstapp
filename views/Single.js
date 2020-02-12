@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, {useState, useEffect} from 'react';
 import {Dimensions} from 'react-native';
 import AsyncImage from '../components/AsyncImage';

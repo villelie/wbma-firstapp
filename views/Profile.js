@@ -1,3 +1,4 @@
+/* eslint-disable react/display-name */
 import React, {useState, useEffect} from 'react';
 import {Dimensions, AsyncStorage} from 'react-native';
 import PropTypes from 'prop-types';
@@ -59,6 +60,9 @@ const Profile = (props) => {
                             <Text>Email: {user.userdata.email}</Text>
                         </Body>
                     </CardItem>
+                    <Button full warning onPress={() => {props.navigation.push('MyFiles')}}>
+                        <Text>MyFiles</Text>
+                    </Button>
                     <Button full onPress={signOutAsync}>
                         <Text>Sign out</Text>
                     </Button>
